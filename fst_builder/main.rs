@@ -3,6 +3,7 @@ use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::path::Path;
 
+use std::io::Write;
 
 fn main() {
     let input_file = Path::new("fst_builder/data/purls.txt");
@@ -14,11 +15,22 @@ fn main() {
     let f = File::open(input_file).expect("Cannot open input file");
     let reader = BufReader::new(f);
 
-    for line in reader.lines() {
-        let s = line.expect("Failed to read line");
-        if !s.is_empty() {
-            builder.insert(&s).unwrap();
-        }
+    let mut lines: Vec<String> = reader
+        .lines()
+        .map(|l| l.expect("Failed to read line"))
+        .filter(|s| !s.is_empty())
+        .collect();
+
+    lines.sort();
+
+    let sorted_file = Path::new("fst_builder/data/purls.txt");
+    let mut sorted_f = File::create(sorted_file).expect("Cannot create sorted file");
+    for line in &lines {
+        writeln!(sorted_f, "{}", line).expect("Failed to write line");
+    }
+
+    for line in lines {
+        builder.insert(&line).unwrap();
     }
 
     builder.finish().expect("Failed to finish FST");
