@@ -9,7 +9,6 @@ See https://aboutcode.org for more information about nexB OSS projects.
 
 */
 
-
 use fst::SetBuilder;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
