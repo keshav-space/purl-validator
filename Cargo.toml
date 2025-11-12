@@ -3,11 +3,15 @@ name = "purl_validator"
 version = "0.1.0"
 edition = "2024"
 authors = ["Keshav Priyadarshi <git@keshav.space>", "AboutCode <info@aboutcode.org>"]
-description = "PackageURL validator using prebuilt FST"
 license = "Apache-2.0"
-repository = "https://github.com/aboutcode-org/purl-validator-rust"
 
-exclude = ["fst_builder/*"]
+description = "Offline PackageURL validator using a prebuilt FST of known packages."
+readme = "README.md"
+documentation = "https://docs.rs/purl_validator"
+
+repository = "https://github.com/aboutcode-org/purl-validator.rs"
+keywords = ["package url", "package", "purl"]
+categories = ["development-tools", "security" ]
 
 include = [
     "src/**",
@@ -16,10 +20,6 @@ include = [
     "README.md",
     "LICENSE"
 ]
-
-[lib]
-name = "purl_validator"
-crate-type = ["rlib"]
 
 [dependencies]
 fst = "0.4.7"
